@@ -2,7 +2,7 @@ const express = require("express");
 const path = require("path");
 const logger = require("morgan");
 const bodyParser = require("body-parser");
-const users = require("./Helper/User");
+const users = require("./Controller/User");
 var app = express();
 
 process.env['NODE_ENV']='development';
