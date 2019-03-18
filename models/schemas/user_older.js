@@ -3,13 +3,13 @@ const Schema = mongoose.schema;
 
 var userSchema = new Schema({
     // define schema here
-    firstName: String,
-    lastName: String,
+    firstName: {type: String, trim: true},
+    lastName: {type: String, trim: true},
     address: String,
     classYear: Number,
-    email: String,
-    phone: String,
-    phoneProvider: String,
+    email: {type: String, trim: true, unique: true, sparse: true},
+    phone: {type: String, unique: true, sparse: true},
+    phoneProvider: {type: String, trim: true},
     userName: String,
     isAdmin: boolean,
     isSuperAdmin: boolean,

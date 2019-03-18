@@ -2,7 +2,7 @@ const express = require("express");
 const path = require("path");
 const logger = require("morgan");
 const bodyParser = require("body-parser");
-const users = require("./Controller/User");
+const users = require("./Controller/Users");
 var app = express();
 
 process.env['NODE_ENV']='development';
@@ -26,27 +26,19 @@ app.use(bodyParser.urlencoded({extended:false}));
 /**
  * ROUTES 
  */
-
- app.post('/users', users.createUser);
-
- //handle 404
- app.use(function(req, res, next){
-     var err = new Error('Not Found');
-     res.status = 404;
-     next(err);
- });
-
-// development error handler
- if(dev){
-    app.use(function(err, req, res, next){
-        console.log(err);
-        res.status(err.status||500).send();
-    });
- }
+app.get('/users', users.getUsers);
+app.get('/users/:id', user.getUserById);
+app.post('/users', users.createUser);
+//handle 404
+app.use(function(req, res, next){
+    var err = new Error('Not Found');
+    res.status = 404;
+    next(err);
+});
 
 // production error handler
- app.use(function(err, req, res, next){
-    res.status(err.status||500).send();
+app.use(function(err, req, res, next){
+   res.status(err.status||500).send();
 });
 
 var server = app.listen(config.port);
